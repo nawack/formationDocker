@@ -1,0 +1,14 @@
+FROM ubuntu:16.04
+
+ENV PATH /usr/games:$PATH
+ARG toto
+ENV MESSAGE $toto
+
+RUN apt-get update && apt-get install -y \
+ figlet \
+ cowsay
+
+WORKDIR /app/
+
+CMD cowsay ${MESSAGE}
+

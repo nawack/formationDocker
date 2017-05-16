@@ -1,0 +1,27 @@
+version: '2'
+services:
+  mysql:
+    networks:
+      - production
+    volumes:
+      - mysql-data:/valr/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=jerome
+      - MYSQL_PASSWORD=production
+      - MYSQL_DATABASE=mydatabase
+    image: mysql
+  mysql-client:
+#    build: .
+    networks :
+      - production
+    stdin_open: true
+    image: mysql-client
+
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  production:
+    driver: bridge

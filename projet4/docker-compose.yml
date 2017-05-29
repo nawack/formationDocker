@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  web:
+    image: tutum/hello-world
+    ports:
+      - 80
+    networks:
+      - ucp-hrm
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels:
+        com.docker.ucp.mesh.http: "external_route=http://hello-world.training.com,internal_port=80"
+
+networks:
+  ucp-hrm:
+    external: true
+

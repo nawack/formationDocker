@@ -27,4 +27,5 @@ sudo vigr (ajout de devops dans le groupe docker)
 
 docker container run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp install -i
 
-
+13.79.236.2 doussot-2.northeurope.cloudapp.azure.com
+13.79.236.2 hello-world.training.com

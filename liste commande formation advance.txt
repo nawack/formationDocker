@@ -1,0 +1,30 @@
+ssh -i dat.key devops@doussot-1.northeurope.cloudapp.azure.com
+
+for i in 1 2 3 4 5
+do
+ssh -i dat.key devops@doussot-$i.northeurope.cloudapp.azure.com sudo apt-get update
+ssh -i dat.key devops@doussot-$i.northeurope.cloudapp.azure.com sudo apt-get install -y ntp
+done
+
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+
+curl -fsSL https://storebits.docker.com/ee/ubuntu/sub-121232aa-1714-4e8c-a914-9737b31a0a1e/gpg | sudo apt-key add -
+
+
+sudo add-apt-repository \
+   "deb [arch=amd64] https://storebits.docker.com/ee/ubuntu/sub-121232aa-1714-4e8c-a914-9737b31a0a1e \
+   $(lsb_release -cs) \
+   stable-17.03"
+
+sudo apt-get update
+sudo apt-get install docker-ee
+sudo vigr (ajout de devops dans le groupe docker)
+
+docker container run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp install -i
+
+

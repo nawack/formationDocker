@@ -1,0 +1,34 @@
+version: '3.1'
+services:
+  my-wordpress-db:
+    image: mysql:5.7
+    networks:
+      - my-wordpress-net
+    sercrets:
+      - my-sercret-pass
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/my-sercret-pass
+ my-wordpress:
+    image: wordpress
+    ports:
+      - 80
+    networks:
+      - my-wordpress-net
+      - ucp-hrm
+    sercrets:
+      - my-sercret-pass
+    environment:
+      - WORDPRESS_DB_HOST=my-wordpress-db:3306     
+      - WORDPRESS_DB_PASSWORD_FILE=/run/secrets/my-sercret-pass
+    deploy:
+      labels:
+        com.docker.ucp.mesh.http: "external_route=http://hello-world.training.com,internal_port=80"
+sercrets:
+  my-sercret-pass:
+    external: true
+networks:
+  ucp-hrm:
+    external: true
+  my-wordpress-net:
+    external: true
+

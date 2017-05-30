@@ -1,3 +1,4 @@
+préparation des machines
 ssh -i dat.key devops@doussot-1.northeurope.cloudapp.azure.com
 
 for i in 1 2 3 4 5
@@ -6,6 +7,13 @@ ssh -i dat.key devops@doussot-$i.northeurope.cloudapp.azure.com sudo apt-get upd
 ssh -i dat.key devops@doussot-$i.northeurope.cloudapp.azure.com sudo apt-get install -y ntp
 done
 
+for i in 1 2 3 4 5
+do
+ssh -i dat.key devops@doussot-$i.northeurope.cloudapp.azure.com sudo ntpdate -u pool.ntp.org
+done
+
+
+installation de Docker EE:
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
@@ -25,7 +33,9 @@ sudo apt-get update
 sudo apt-get install docker-ee
 sudo vigr (ajout de devops dans le groupe docker)
 
+desinstallation de ucp :
 docker container run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp install -i
 
+edition du fichier host local :
 13.79.236.2 doussot-2.northeurope.cloudapp.azure.com
 13.79.236.2 hello-world.training.com

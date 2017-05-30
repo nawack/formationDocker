@@ -4,22 +4,22 @@ services:
     image: mysql:5.7
     networks:
       - my-wordpress-net
-    secret:
+    secrets:
       - my-secret-pass
     environment:
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/my-secret-pass
- my-wordpress:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/my-secret-pass
+  my-wordpress:
     image: wordpress
     ports:
       - 80
     networks:
       - my-wordpress-net
       - ucp-hrm
-    secret:
+    secrets:
       - my-secret-pass
     environment:
-      - WORDPRESS_DB_HOST=my-wordpress-db:3306     
-      - WORDPRESS_DB_PASSWORD_FILE=/run/secrets/my-secret-pass
+      WORDPRESS_DB_HOST: my-wordpress-db:3306     
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/my-secret-pass
     deploy:
       labels:
         com.docker.ucp.mesh.http: "external_route=http://hello-world.training.com,internal_port=80"
